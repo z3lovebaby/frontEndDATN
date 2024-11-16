@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <div class="title">
+        <span>Home</span>
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="isLoading"><ion-skeleton-text animated style="max-width: 43vh;height: 24vh;margin: 0.55rem;text-align: center;"></ion-skeleton-text></div>
+  <app-loading-shop *ngIf="isLoading"></app-loading-shop>
+  
+  <app-banner *ngIf="!isLoading" [bannerImages]="bannerImgs"></app-banner>
+  <app-convert-link *ngIf="!isLoading"></app-convert-link>
+  <ion-list *ngIf="!isLoading && shops.length>0">
+    <ion-list-header class="ion-margin-bottom">
+      <ion-label>
+        <h4>Shop sale đậm giảm sâu</h4>
+        <p>Discover hot deal</p>
+      </ion-label>
+    </ion-list-header>
+    <ion-item-group *ngIf="shops?.length>0">
+      <!-- <app-shop *ngFor="let shop of shops" [shop]="shop" [routerLink]="['/','tabs','shops',shop.uid]"></app-shop> -->
+      <app-shop *ngFor="let shop of shops" [shop]="shop" (mousedown)="onMouseDown()" 
+  (mouseup)="onMouseUp(shop.uid)"></app-shop>
+    </ion-item-group>
+  </ion-list>
+
+    <ion-modal #otp_modal [isOpen]="verifyOtp" (ionModalDidDismiss)="resetOtpModal($event)" cssClass="inline_modal"
+      [breakpoints]="[0.32, 0.5, 0.9]" [initialBreakpoint]="0.32">
+      <ng-template>
+        <app-otp-screen (verified)="otpVerified($event)" [sendOtp]="true"></app-otp-screen>
+      </ng-template>
+    </ion-modal>
+</ion-content>

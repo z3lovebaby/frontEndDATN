@@ -1,0 +1,7 @@
+{
+  "name": "ShopBack",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

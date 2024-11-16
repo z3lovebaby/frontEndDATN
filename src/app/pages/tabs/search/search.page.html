@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-searchbar #searchInput animated="true" debounce="800" (ionChange)="onSearchChange($event)">
+
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-loading-shop *ngIf="isLoading"></app-loading-shop>
+  <app-empty-screen *ngIf="!isLoading && (shops?.length == 0 || query?.length == 0)" [model]="model"></app-empty-screen>
+  <ion-list *ngIf="!isLoading && shops.length>0">
+    <ion-list-header>
+      <ion-label>
+        <h4>Search results for "{{query}}"</h4>
+      </ion-label>
+    </ion-list-header>
+    <app-shop *ngFor="let shop of shops" [shop]="shop" [routerLink]="['/','tabs','shops',shop.uid]"></app-shop>
+  </ion-list>
+</ion-content>

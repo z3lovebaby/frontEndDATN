@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Quản lý đơn</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/account"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-item-group class="borderBottomNormal">
+    <ion-item lines="none"><h3>Nhập ID đơn đặt hàng:</h3></ion-item>
+    <ion-item >
+    <ion-input label="ID đơn đặt hàng" labelPlacement="floating" placeholder="Enter text" [(ngModel)]="orderID"></ion-input>
+    <ion-button color="secondary" fill="solid" (click)="onClick($event)">
+      Gửi
+      <ion-icon name="paper-plane-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  </ion-item-group>
+      <ion-item-group *ngIf="orderItems?.length>0">
+    <ion-item *ngFor="let order of orderItems;let i = index">
+      <ion-thumbnail slot="start">
+        <img [src]="order?.cover ? order?.cover:''">
+      </ion-thumbnail>
+      <ion-label>
+        <h4 class="ion-text-wrap">{{order?.name}}</h4>
+        <p class="ion-text-wrap">{{order?.shop}}</p>
+        <p class="ion-text-wrap">{{order?.date}}</p>
+        <!-- <ion-text>
+          <p>{{pro?.price}}</p>
+        </ion-text> -->
+      </ion-label>
+      <ion-label class="ion-text-end">
+        <p class="ion-text-wrap" [style.color]="order.textColor">{{order?.status}}</p>
+        <ion-text color="success">{{order?.hoahong}}VNĐ</ion-text>
+      </ion-label>
+    </ion-item>
+      </ion-item-group>
+</ion-content>

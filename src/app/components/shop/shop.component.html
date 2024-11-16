@@ -1,0 +1,24 @@
+<ion-item lines="none">
+    <ion-thumbnail slot="start">
+      <img
+        [src]="shop?.cover? shop.cover:'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Giay_Co_Thap_Forum_trang_FY7756_01_standard.jpg'"
+        >
+    </ion-thumbnail>
+    <ion-label>
+      <h4>{{shop?.nameShop}}</h4>
+      <ion-text color="medium">
+        <p class="pStyle">
+          {{shop?.type}}
+        </p>
+      </ion-text>
+      <span>
+        <ion-icon name="star"></ion-icon>
+        {{shop?.rating}}
+      </span>
+      <ion-text color="tertiary">
+        <p class="distance">
+          {{shop?.addr}}
+        </p>
+      </ion-text>
+    </ion-label>
+  </ion-item>

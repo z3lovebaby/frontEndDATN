@@ -1,0 +1,7 @@
+<swiper-container [modules]="swiperModules" [slidesPerView]="1" [loop]="true"
+  [pagination]="{clickable:true,dynamicBullets:true}" *ngIf="bannerImages?.length>0" class="borderBottomSmall">
+  <swiper-slide *ngFor="let image of bannerImages">
+    <img
+      [src]="image?.banner">
+  </swiper-slide>
+</swiper-container>

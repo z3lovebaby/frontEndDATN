@@ -1,0 +1,33 @@
+<ion-list class="borderBottomSmall">
+  <ion-list-header>
+    <ion-label>
+      <h4>Chuyển đổi link</h4>
+    </ion-label>
+  </ion-list-header>
+  <ion-item>
+    <ion-input class="ion-text-light" label="Nhập link tại đây" labelPlacement="stacked"
+      placeholder="https://vn.shp.ee/Kkfs4T9" required pattern="https?://.+" [(ngModel)]="inputLink" #inputRef="ngModel"
+      (ngModelChange)="onInputChange()">
+    </ion-input>
+    <ion-button color="secondary" fill="solid" (click)="onClick($event)">
+      Start
+      <ion-icon name="paper-plane-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-item *ngIf="convertedLink">
+    <ion-label>
+      <h6>Result Convert:</h6>
+      <a [href]="convertedLink" target="_blank">{{ convertedLink }}</a>
+    </ion-label>
+  </ion-item>
+  <!-- Hiển thị thông báo lỗi -->
+<!-- Hiển thị thông báo lỗi nếu có lỗi -->
+<ion-item lines="none" *ngIf="inputRef.invalid && (inputRef.touched || inputRef.dirty)">
+  <ion-text color="danger">
+    <p *ngIf="inputRef.errors?.['required'] && inputRefErrors?.['required']">Trường này là bắt buộc.</p>
+    <p *ngIf="inputRef.errors?.['pattern'] && inputRefErrors?.['pattern']">Vui lòng nhập link hợp lệ (bắt đầu với
+      http:// hoặc https://).</p>
+  </ion-text>
+</ion-item>
+<!-- Hiển thị kết quả chuyển đổi -->
+</ion-list>

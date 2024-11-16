@@ -1,0 +1,46 @@
+h1 {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+.new {
+    align-items: center;
+}
+
+ion-label {
+    margin-right: 0.5rem;
+}
+
+.dashedBorderBottom {
+    border-bottom: 1px dashed var(--ion-color-medium);
+    padding-bottom: 1vh;
+    margin-bottom: 1vh;
+}
+
+ion-list-header {
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+ion-item {
+    ion-row {
+        border: 1px solid var(--ion-color-medium);
+        border-radius: 2px;
+        padding: 0.3rem;
+    }
+
+    ion-thumbnail {
+        height: 10vh;
+        width: 20vw;
+
+        img {
+            border-radius: 5px;
+            height: 100%;
+        }
+    }
+}
