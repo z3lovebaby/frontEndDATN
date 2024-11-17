@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { order } from 'src/app/models/order.model';
 import { GlobalService } from 'src/app/services/global/global.service';
 import { ShopeeAPIService } from 'src/app/services/shopee/shopee-api.service';
@@ -11,12 +12,80 @@ import { ShopeeAPIService } from 'src/app/services/shopee/shopee-api.service';
 export class ManagerOrderPage implements OnInit {
   orderID: any;
   orderItems: order[] = [];
+  total = 1000000;
   constructor(
     private peeService: ShopeeAPIService,
-    private global: GlobalService
+    private global: GlobalService,
+    private router: Router
   ) {}
   ngOnInit() {
     this.orderItems = [
+      {
+        oid: 'ORD-123456',
+        cover:
+          'https://down-cvs-vn.img.susercontent.com/sg-11134201-7qvfb-lijwcj3e5qxb3f.webp',
+        name: 'Sản phẩm A',
+        shop: 'Cửa hàng ABC',
+        date: '15/11/2024',
+        status: 'Bị hủy',
+        textColor: 'gray',
+        hoahong: 150000,
+      },
+      {
+        oid: 'ORD-123456',
+        cover:
+          'https://down-cvs-vn.img.susercontent.com/sg-11134201-7qvfb-lijwcj3e5qxb3f.webp',
+        name: 'Sản phẩm A',
+        shop: 'Cửa hàng ABC',
+        date: '15/11/2024',
+        status: 'Bị hủy',
+        textColor: 'gray',
+        hoahong: 150000,
+      },
+      {
+        oid: 'ORD-123456',
+        cover:
+          'https://down-cvs-vn.img.susercontent.com/sg-11134201-7qvfb-lijwcj3e5qxb3f.webp',
+        name: 'Sản phẩm A',
+        shop: 'Cửa hàng ABC',
+        date: '15/11/2024',
+        status: 'Bị hủy',
+        textColor: 'gray',
+        hoahong: 150000,
+      },
+      {
+        oid: 'ORD-123456',
+        cover:
+          'https://down-cvs-vn.img.susercontent.com/sg-11134201-7qvfb-lijwcj3e5qxb3f.webp',
+        name: 'Sản phẩm A',
+        shop: 'Cửa hàng ABC',
+        date: '15/11/2024',
+        status: 'Bị hủy',
+        textColor: 'gray',
+        hoahong: 150000,
+      },
+      {
+        oid: 'ORD-123456',
+        cover:
+          'https://down-cvs-vn.img.susercontent.com/sg-11134201-7qvfb-lijwcj3e5qxb3f.webp',
+        name: 'Sản phẩm A',
+        shop: 'Cửa hàng ABC',
+        date: '15/11/2024',
+        status: 'Bị hủy',
+        textColor: 'gray',
+        hoahong: 150000,
+      },
+      {
+        oid: 'ORD-123456',
+        cover:
+          'https://down-cvs-vn.img.susercontent.com/sg-11134201-7qvfb-lijwcj3e5qxb3f.webp',
+        name: 'Sản phẩm A',
+        shop: 'Cửa hàng ABC',
+        date: '15/11/2024',
+        status: 'Bị hủy',
+        textColor: 'gray',
+        hoahong: 150000,
+      },
       {
         oid: 'ORD-123456',
         cover:
@@ -83,5 +152,8 @@ export class ManagerOrderPage implements OnInit {
     //       //khoa tam thoi tai khoan -  chuc nang rut tien
     //     }
     //   });
+  }
+  rut() {
+    this.router.navigateByUrl('/tabs/withdraw');
   }
 }

@@ -19,6 +19,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./pages/admin/admin.module').then((m) => m.AdminPageModule),
+    canMatch: [authGuard],
+  },
   // {
   //   path: 'withdraw',
   //   loadChildren: () => import('./pages/withdraw/withdraw.module').then( m => m.WithdrawPageModule)

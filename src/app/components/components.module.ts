@@ -11,6 +11,7 @@ import { OtpInputComponent } from './otp-input/otp-input.component';
 import { OtpScreenComponent } from './otp-screen/otp-screen.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { DealInputComponent } from './deal-input/deal-input.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DealInputComponent } from './deal-input/deal-input.component';
     OtpScreenComponent,
     ResetPasswordComponent,
     DealInputComponent,
+    EditProfileComponent,
   ],
   imports: [IonicModule, CommonModule, FormsModule, NgOtpInputModule],
   exports: [
@@ -33,6 +35,7 @@ import { DealInputComponent } from './deal-input/deal-input.component';
     OtpScreenComponent,
     ResetPasswordComponent,
     DealInputComponent,
+    EditProfileComponent,
   ],
 })
 export class ComponentsModule {}

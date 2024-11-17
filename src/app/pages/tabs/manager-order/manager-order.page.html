@@ -5,9 +5,22 @@
       <ion-back-button defaultHref="/tabs/account"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-item-group class="">
+    <ion-item lines="none">
+      <h3>Nhập ID đơn đặt hàng:</h3>
+    </ion-item>
+    <ion-item>
+      <ion-input label="ID đơn đặt hàng" labelPlacement="floating" placeholder="Enter text"
+        [(ngModel)]="orderID"></ion-input>
+      <ion-button color="secondary" fill="solid" (click)="onClick($event)">
+        Gửi
+        <ion-icon name="paper-plane-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-item-group>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-item-group class="borderBottomNormal">
+  <!-- <ion-item-group class="borderBottomNormal">
     <ion-item lines="none"><h3>Nhập ID đơn đặt hàng:</h3></ion-item>
     <ion-item >
     <ion-input label="ID đơn đặt hàng" labelPlacement="floating" placeholder="Enter text" [(ngModel)]="orderID"></ion-input>
@@ -16,7 +29,7 @@
       <ion-icon name="paper-plane-outline"></ion-icon>
     </ion-button>
   </ion-item>
-  </ion-item-group>
+  </ion-item-group> -->
       <ion-item-group *ngIf="orderItems?.length>0">
     <ion-item *ngFor="let order of orderItems;let i = index">
       <ion-thumbnail slot="start">
@@ -37,3 +50,18 @@
     </ion-item>
       </ion-item-group>
 </ion-content>
+<ion-footer *ngIf="orderItems.length > 0">
+  <ion-toolbar color="success">
+    <ion-label color="white">
+      <h4>{{orderItems.length}} Item<span *ngIf="orderItems?.length > 1">s</span> | ₹{{total | number:
+        '0.2-2'}}</h4>
+      <ion-text color="light">
+        <p>Chỉ tính những đơn đã hoàn thành</p>
+      </ion-text>
+    </ion-label>
+    <ion-button slot="end" color="warning" (click)="rut()">
+      <ion-icon slot="end" name="card-outline"></ion-icon>
+      Withdraw
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
