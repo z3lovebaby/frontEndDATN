@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Quản lý Banner</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item lines="none"><label for="file-input" class="custom-file-label ion-text-wrap">{{lab}}</label>
+  </ion-item>
+  <ion-item lines="none" class="file-upload-item">
+    <!-- Nút tùy chỉnh để chọn file -->
+    <!-- Input file ẩn -->
+    <input type="file" id="file-input" (change)="preview($event)" hidden>
+    <ion-text *ngIf="file?.name" color="success">{{file.name}}</ion-text>
+    <!-- Hiển thị ảnh preview -->
+    <ion-thumbnail slot="end">
+      <img *ngIf="bannerImage" [src]="bannerImage" />
+    </ion-thumbnail>
+  </ion-item>
+  <ion-item>
+    <ion-input class="inputLink" label="Link AFF cho banner" fill="outline" labelPlacement="floating"
+      placeholder="Nhập link" [(ngModel)]="link"></ion-input>
+  </ion-item>
+  <ion-button expand="block" class="ion-margin" color="primary" (click)="save()">Save</ion-button>
+  <ion-item-group>
+    <ion-row>
+      <ion-col>Banner</ion-col>
+      <ion-col size="2">Status</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of bannerItems;let i = index">
+      <ion-col class="ion-align-items-center ion-justify-content-center" style="display: flex;">
+        <ion-thumbnail>
+          <img [src]="item?.banner.banner? item?.banner.banner:''">
+        </ion-thumbnail>
+      </ion-col>
+      <ion-col size="2" class="ion-align-items-center ion-justify-content-center" style="display: flex;"><ion-toggle  mode="md" color="success" (ionChange)="newOnly($event,item)"
+          [(ngModel)]="item?.banner.status"></ion-toggle></ion-col>
+    </ion-row>
+
+  </ion-item-group>
+</ion-content>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
+import { OtpGuard } from 'src/app/guards/otp/otp.guard';
 const routes: Routes = [
   {
     path: '',
@@ -54,6 +55,7 @@ const routes: Routes = [
   {
     path: 'otp',
     loadChildren: () => import('./otp/otp.module').then((m) => m.OtpPageModule),
+    canActivate: [OtpGuard],
   },
   {
     path: 'deal-items',

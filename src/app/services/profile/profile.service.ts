@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from '../api/api.service';
-import { AuthService } from '../auth/auth.service';
 import { User } from 'src/app/models/user.model';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class ProfileService {
     return this._profile.asObservable();
   }
 
-  constructor(private api: ApiService, private auth: AuthService) {}
+  constructor(private api: ApiService) {}
 
   async getProfile() {
     try {
@@ -31,8 +30,8 @@ export class ProfileService {
         //   profile?.status,
         //   profile?.email_verified
         // );
-        this.updateProfileData(profile);
-      }
+        return this.updateProfileData(profile);
+      } else return profile_data;
     } catch (e) {
       console.log(e);
       throw e;
@@ -65,12 +64,13 @@ export class ProfileService {
         ...param,
       });
       const profile = profile_data?.user;
-      await this.auth.setUserData(
-        profile_data?.token,
-        profile_data?.refreshToken
-      );
+      // await this.auth.setUserData(
+      //   profile_data?.token,
+      //   profile_data?.refreshToken
+      // );
       console.log('profile data: ', profile);
       this.updateProfileData(profile);
+      return profile_data;
     } catch (e) {
       console.log(e);
       throw e;
@@ -103,16 +103,20 @@ export class ProfileService {
   }
 
   updateProfileData(profile) {
-    const data = new User(
-      profile.email,
-      profile.phone,
-      profile.name,
-      profile._id,
-      profile.type,
-      profile.status,
-      profile.email_verified
-    );
+    let data: any;
+    if (profile) {
+      data = new User(
+        profile?.email,
+        profile?.phone,
+        profile?.name,
+        profile?._id,
+        profile?.type,
+        profile?.status,
+        profile?.email_verified
+      );
+    } else data = profile;
     console.log(data);
     this._profile.next(data);
+    return data;
   }
 }

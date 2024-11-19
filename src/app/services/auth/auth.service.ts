@@ -25,6 +25,7 @@ export class AuthService {
     private router: Router,
     private storage: StorageService,
     private api: ApiService,
+    private profile: ProfileService,
     private injector: Injector
   ) {}
 
@@ -72,6 +73,22 @@ export class AuthService {
       })
     );
   }
+  async getUser() {
+    const token = await this.getToken();
+    console.log(token);
+    try {
+      if (token) {
+        const user: any = await this.profile.getProfile();
+        console.log(user);
+        if (user) return user;
+        return false;
+      }
+      return null;
+    } catch (e) {
+      if (token) return false;
+      return null;
+    }
+  }
   isLoggedIn() {
     return this.getToken();
   }
@@ -116,9 +133,9 @@ export class AuthService {
   }
 
   updateProfileData(data) {
-    const profile = this.injector.get(ProfileService);
-    profile.updateProfileData(data);
-    //this.profile.updateProfileData(data);
+    // const profile = this.injector.get(ProfileService);
+    // profile.updateProfileData(data);
+    this.profile.updateProfileData(data);
   }
 
   async sendResetPasswordOtp(email: string) {
@@ -165,6 +182,7 @@ export class AuthService {
   logout() {
     this.storage.removeStorage(Strings.TOKEN);
     this.storage.removeStorage(Strings.REFRESH_TOKEN);
+    this.profile.updateProfileData(null);
     this._refreshToken.next(null);
     this._token.next(null);
     this.router.navigateByUrl('/login', { replaceUrl: true });

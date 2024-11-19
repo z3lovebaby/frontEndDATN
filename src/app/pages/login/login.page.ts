@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { Strings } from 'src/app/enum/strings';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GlobalService } from 'src/app/services/global/global.service';
 
@@ -48,7 +49,7 @@ export class LoginPage {
       .login(form.value.email, form.value.password)
       .then((data) => {
         console.log(data);
-        this.navigate();
+        this.navigate(data?.user?.type);
         this.isLogin = false;
         form.reset();
       })
@@ -63,8 +64,10 @@ export class LoginPage {
       });
   }
 
-  navigate() {
-    this.router.navigateByUrl('/tabs');
+  navigate(role?) {
+    let url: string = Strings.TABS;
+    if (role == Strings.ADMIN_TYPE) url = Strings.ADMIN;
+    this.router.navigateByUrl(url, { replaceUrl: true });
   }
   changeType() {
     this.type = !this.type;

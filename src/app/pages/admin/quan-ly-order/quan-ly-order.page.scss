@@ -1,0 +1,27 @@
+.file-upload-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Nút tùy chỉnh cho input file */
+.custom-file-label {
+    background-color: var(--ion-color-secondary);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-top: 0.5rem;
+}
+
+.custom-file-label:hover {
+    background-color: var(--ion-color-secondary-tint);
+}
+
+ion-text {
+    font-size: 0.8rem;
+    font-weight: bold;
+}

@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './guards/auth/auth.guard';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { Strings } from './enum/strings';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'tabs',
     pathMatch: 'full',
   },
   {
     path: 'tabs',
     loadChildren: () =>
       import('./pages/tabs/tabs.module').then((m) => m.TabsPageModule),
-    canMatch: [authGuard],
+    canMatch: [AuthGuard],
+    data: {
+      role: Strings.USER_TYPE,
+    },
   },
   {
     path: 'login',
@@ -23,7 +27,10 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./pages/admin/admin.module').then((m) => m.AdminPageModule),
-    canMatch: [authGuard],
+    canMatch: [AuthGuard],
+    data: {
+      role: Strings.ADMIN_TYPE,
+    },
   },
   // {
   //   path: 'withdraw',

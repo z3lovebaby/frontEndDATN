@@ -116,15 +116,14 @@ export class ApiService {
     );
   }
 
-  post(url: string, data: any) {
-    const body = new HttpParams({
-      fromObject: data,
-    });
+  post(url: string, data: any, formData: boolean = false) {
+    if (!formData) {
+      data = new HttpParams({ fromObject: data });
+    }
     return firstValueFrom(
-      this.http.post<any>(environment.serverBaseUrl + url, body)
+      this.http.post<any>(environment.serverBaseUrl + url, data)
     );
   }
-
   patch(url: string, data: any) {
     const body = new HttpParams({
       fromObject: data,

@@ -1,0 +1,49 @@
+.file-upload-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Nút tùy chỉnh cho input file */
+.custom-file-label {
+    background-color: var(--ion-color-secondary);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-top: 0.5rem;
+}
+
+.custom-file-label:hover {
+    background-color: var(--ion-color-secondary-tint);
+}
+ion-text{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.inputLink{
+    margin-top: 0.5rem;
+}
+ion-thumbnail {
+    // --size: 120px;
+    --border-radius: 14px;
+    width: 100%;
+        /* Đặt chiều rộng theo ý muốn */
+        height: auto;
+        /* Đặt chiều cao tự động để giữ tỷ lệ ảnh */
+        aspect-ratio: auto;
+        img {
+                width: 100%;
+                /* Đảm bảo ảnh chiếm toàn bộ diện tích */
+                height: auto;
+                /* Đảm bảo tỷ lệ ảnh không bị méo */
+            }
+}
+ion-col {
+    border: solid 1px #141414;
+    color: #141313;
+    text-align: center;
+}

@@ -13,7 +13,7 @@ import { ProfileService } from 'src/app/services/profile/profile.service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy {
+export class HomePage implements OnInit {
   @ViewChild('otp_modal') modal: ModalController;
   private mouseDownTime: number | null = null;
   private readonly clickThreshold = 200; //
@@ -22,7 +22,6 @@ export class HomePage implements OnInit, OnDestroy {
   shops: shop[] = [];
   isLoading: boolean = false;
   profile: User;
-  profileSub: Subscription;
   verifyOtp = false;
 
   constructor(
@@ -40,17 +39,20 @@ export class HomePage implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.getProfile();
-    this.profileSub = this.profileService.profile.subscribe((profile) => {
-      console.log('profile: ', profile);
-      this.profile = profile;
-      if (this.profile && !this.profile?.email_verified) {
-        this.checkEmailVerified();
-      }
-    });
+    // this.profileSub = this.profileService.profile.subscribe((profile) => {
+    //   console.log('profile: ', profile);
+    //   this.profile = profile;
+    //   if (this.profile && !this.profile?.email_verified) {
+    //     this.checkEmailVerified();
+    //   }
+    // });
   }
   async getProfile() {
     try {
-      await this.profileService.getProfile();
+      this.profile = await this.profileService.getProfile();
+      if (this.profile && !this.profile?.email_verified) {
+        this.checkEmailVerified();
+      }
     } catch (e) {
       console.log(e);
       this.global.errorToast();
@@ -84,8 +86,5 @@ export class HomePage implements OnInit, OnDestroy {
       }
     }
     this.mouseDownTime = null; // Reset trạng thái
-  }
-  ngOnDestroy() {
-    if (this.profileSub) this.profileSub.unsubscribe();
   }
 }
