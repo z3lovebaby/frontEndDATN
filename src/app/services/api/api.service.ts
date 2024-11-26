@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { shop } from 'src/app/models/shop.model';
 import { environment } from 'src/environments/environment';
 
@@ -114,6 +114,13 @@ export class ApiService {
     return firstValueFrom(
       this.http.get<any>(environment.serverBaseUrl + url, { params: data })
     );
+  }
+  getOb(url: string, data?: any): Observable<any> {
+    const params = data
+      ? new HttpParams({ fromObject: data })
+      : new HttpParams();
+
+    return this.http.get<any>(`${environment.serverBaseUrl}${url}`, { params });
   }
 
   post(url: string, data: any, formData: boolean = false) {

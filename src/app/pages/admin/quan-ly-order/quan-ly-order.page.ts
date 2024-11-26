@@ -12,9 +12,12 @@ export class QuanLyOrderPage implements OnInit {
   lab = 'Chọn tệp';
   file: any;
   orderItems: any;
+  totalPage: 1;
+  page = 1;
+
   constructor(private global: GlobalService, private order: QuanlydonService) {}
   ngOnInit() {
-    this.getOrder();
+    this.getOrder('1');
   }
 
   preview(event) {
@@ -43,7 +46,7 @@ export class QuanLyOrderPage implements OnInit {
       postData.append('fileAffReport', this.file, this.file.name);
       const response = await this.order.addOrderByFileReport(postData);
       console.log(response);
-      await this.getOrder();
+      await this.getOrder('1');
       this.global.successToast('Banner added successfully');
       this.reset();
       this.global.hideLoader();
@@ -52,11 +55,22 @@ export class QuanLyOrderPage implements OnInit {
       console.log(e);
     }
   }
-  async getOrder() {
+  async getOrder(page) {
     try {
+      this.orderItems = [];
       this.global.showLoader();
-      this.orderItems = await this.order.getOrderItems();
-      console.log(this.orderItems);
+      const res = this.order.getOrderItems(page).subscribe(
+        (response) => {
+          console.log(response);
+          this.orderItems = response.data;
+          if (response.totalPage > 1) this.totalPage = response.totalPage;
+          else this.totalPage = 1;
+        },
+        (error) => {
+          console.error('Có lỗi khi lấy dữ liệu:', error);
+        }
+      );
+      console.log('ressponnnn: ', res);
       this.global.hideLoader();
     } catch (e) {
       this.global.hideLoader();
@@ -69,11 +83,40 @@ export class QuanLyOrderPage implements OnInit {
       this.orderItems.push(`Item ${count + i}`);
     }
   }
-  async reset() {}
+  async reset() {
+    this.lab = 'Chọn tệp';
+    this.file = null;
+  }
   onIonInfinite(ev) {
-    this.generateItems();
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
     }, 500);
+  }
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'Hoàn thành':
+        return 'green'; // Mã màu xanh
+      case 'Đang chờ xử lý':
+        return '#eda500'; // Mã màu vàng
+      case 'Đã hủy':
+        return 'gray'; // Mã màu xám
+      default:
+        return 'black'; // Mã màu mặc định
+    }
+  }
+
+  nextPage(event) {
+    console.log(this.page);
+    if (this.page < this.totalPage) {
+      this.page = this.page + 1;
+      this.getOrder(this.page);
+    }
+  }
+  backPage(event) {
+    console.log(this.page);
+    if (this.page > 1) {
+      this.page = this.page - 1;
+      this.getOrder(this.page);
+    }
   }
 }

@@ -7,14 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { QuanLyOrderPageRoutingModule } from './quan-ly-order-routing.module';
 
 import { QuanLyOrderPage } from './quan-ly-order.page';
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    QuanLyOrderPageRoutingModule
+    QuanLyOrderPageRoutingModule,
   ],
-  declarations: [QuanLyOrderPage]
+  declarations: [QuanLyOrderPage],
 })
 export class QuanLyOrderPageModule {}

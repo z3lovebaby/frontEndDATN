@@ -16,10 +16,10 @@ export class QuanlydonService {
     }
   }
 
-  async getOrderItems() {
+  getOrderItems(page: string) {
     try {
-      const res = await this.api.get('quanlydon/orderItems');
-      return res.data;
+      const res = this.api.getOb('quanlydon/orderItems', { page: page });
+      return res;
     } catch (e) {
       throw e;
     }
